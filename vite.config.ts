@@ -9,10 +9,12 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
+  // 👇 Important for GitHub Pages project site:
+  // Use the repo name as base in production so assets resolve under /reachright-marketing/
+  base: mode === "production" ? "/reachright-marketing/" : "/",
   plugins: [
     react(),
-    mode === 'development' &&
-    componentTagger(),
+    mode === "development" && componentTagger(),
   ].filter(Boolean),
   resolve: {
     alias: {
