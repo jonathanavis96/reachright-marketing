@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Linkedin, Twitter, Phone, Mail, MessageCircle } from "lucide-react";
 
+// Import your logo from the public folder
+// Note: Because it's in /public, we can just use the path directly in <img src="...">
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -11,9 +13,13 @@ const Footer = () => {
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-xl">R</span>
-              </div>
+              <img
+                src="/assets/img/branding/favicon-32x32.png"
+                alt="ReachRight Marketing"
+                width="40"
+                height="40"
+                className="rounded-lg"
+              />
               <span className="font-bold text-xl text-foreground">ReachRight Marketing</span>
             </div>
             <p className="text-muted-foreground mb-4 max-w-md">
