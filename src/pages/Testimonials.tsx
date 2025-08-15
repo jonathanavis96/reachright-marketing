@@ -8,21 +8,26 @@ type Testimonial = {
   rating: number; // 1-5
   text: string;
   result: string;
-  link?: string;      // optional hyperlink for name (e.g., CES)
   verified?: boolean; // show verified badge
+  link?: string;      // optional hyperlink for company/logo
+  logo?: string;      // optional logo path for the company
+  logoAlt?: string;   // accessible alt text for the logo
 };
 
 const Testimonials = () => {
   const testimonials: Testimonial[] = [
     {
-      name: "CES",
+      // CES card updated
+      name: "Caroline Beer",
       company: "Coastal and Environmental Services",
       rating: 5,
       text:
         "ReachRight Marketing transformed our online presence. Their expertise in social media management and SEO helped us reach new customers we never thought possible. Highly recommend!",
       result: "300% increase in online engagement",
+      verified: true,
       link: "https://www.cesnet.co.za/",
-      verified: true
+      logo: "/public/assets/img/logos/CESlogo.png",   // <-- update to your actual asset path
+      logoAlt: "CES (Coastal and Environmental Services) logo"
     },
     {
       name: "Sarah Mitchell",
@@ -137,123 +142,3 @@ const Testimonials = () => {
                     {[...Array(MAX_STARS)].map((_, i) => (
                       <Star
                         key={i}
-                        className={
-                          i < testimonial.rating
-                            ? "w-5 h-5 fill-warning text-warning"
-                            : "w-5 h-5 text-muted-foreground"
-                        }
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                <p className="text-muted-foreground mb-6 italic">"{testimonial.text}"</p>
-
-                <div className="border-t border-border pt-4">
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <div className="font-semibold text-foreground">
-                        {testimonial.link ? (
-                          <>
-                            <a
-                              href={testimonial.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="underline underline-offset-2 hover:text-primary transition-colors"
-                            >
-                              {testimonial.name}
-                            </a>{" "}
-                            <span className="text-muted-foreground">(Verified Client)</span>
-                          </>
-                        ) : (
-                          testimonial.name
-                        )}
-                      </div>
-                      <div className="text-sm text-muted-foreground">{testimonial.company}</div>
-                    </div>
-                  </div>
-                  <div className="bg-success/10 text-success px-3 py-1 rounded-full text-sm font-medium inline-block">
-                    {testimonial.result}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 section-gradient">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="animate-fade-in-up">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-              Ready to Join Our Success Stories?
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8">
-              Let's create a success story for your business. Get started with a free consultation
-              and discover how we can help you achieve your marketing goals.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/contact" className="btn-hero inline-flex items-center justify-center text-center">
-                Start Your Success Story
-              </a>
-              <a href="/pricing" className="btn-outline inline-flex items-center justify-center text-center">
-                View Our Packages
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Process Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 animate-fade-in-up">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Proven Process</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              How we help businesses achieve remarkable results
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="text-center animate-scale-in">
-              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 text-primary-foreground font-bold text-xl">
-                1
-              </div>
-              <h3 className="text-xl font-bold text-foreground mb-2">Discovery</h3>
-              <p className="text-muted-foreground">We learn about your business, goals, and target audience</p>
-            </div>
-
-            <div className="text-center animate-scale-in">
-              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 text-primary-foreground font-bold text-xl">
-                2
-              </div>
-              <h3 className="text-xl font-bold text-foreground mb-2">Strategy</h3>
-              <p className="text-muted-foreground">We create a customized marketing strategy for your success</p>
-            </div>
-
-            <div className="text-center animate-scale-in">
-              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 text-primary-foreground font-bold text-xl">
-                3
-              </div>
-              <h3 className="text-xl font-bold text-foreground mb-2">Execute</h3>
-              <p className="text-muted-foreground">We implement and manage your marketing campaigns</p>
-            </div>
-
-            <div className="text-center animate-scale-in">
-              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 text-primary-foreground font-bold text-xl">
-                4
-              </div>
-              <h3 className="text-xl font-bold text-foreground mb-2">Optimize</h3>
-              <p className="text-muted-foreground">We continuously improve and scale your results</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <Footer />
-    </div>
-  );
-};
-
-export default Testimonials;
