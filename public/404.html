@@ -1,21 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Redirecting…</title>
-    <meta http-equiv="refresh" content="0; url=/reachright-marketing/">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script>
       (function() {
-        // Preserve the path after the repo base.
-        var repoBase = '/reachright-marketing/';
-        var path = location.pathname;
-        // If the path already starts with the base, keep it; otherwise prepend.
-        var target = path.startsWith(repoBase) ? path : repoBase + path.replace(/^\//, '');
-        // Rebuild full URL (preserve query & hash)
-        var url = repoBase + '?' + encodeURIComponent(target.replace(repoBase, '')) + location.search + location.hash;
-        // Simpler approach: just send to base; your router will handle it if using BrowserRouter with basename.
-        // If you prefer strict preservation, you can use more advanced SPA GH Pages scripts.
-        location.replace(repoBase);
+        // Your repo base on GH Pages
+        var base = "/reachright-marketing/";
+
+        var l = window.location;
+        // Strip the base from the front of the path (if present)
+        var path = l.pathname.replace(base, "").replace(/^\//, "");
+        var query = l.search || "";
+        var hash = l.hash || "";
+
+        // Send users to index with the original path+query+hash encoded as params
+        var redirectUrl =
+          base +
+          "?p=" + encodeURIComponent(path + query) +
+          "&h=" + encodeURIComponent(hash);
+
+        l.replace(redirectUrl);
       })();
     </script>
   </head>
