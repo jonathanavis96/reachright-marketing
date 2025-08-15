@@ -19,7 +19,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
-            <Link to={`${basePath}/`} className="flex items-center space-x-2 mb-4">
+            <Link to={`${basePath}`} className="flex items-center space-x-2 mb-4">
               <img
                 src={`${basePath}/assets/img/branding/android-chrome-192x192.png`}
                 alt="ReachRight Marketing"
