@@ -37,7 +37,7 @@ const Pricing = () => {
         "Email marketing setup"
       ],
       popular: true,
-      cta: "Get Started"
+      cta: "Most Popular"
     },
     {
       name: "Premium Package",
@@ -56,7 +56,7 @@ const Pricing = () => {
         "Advanced SEO & content marketing"
       ],
       popular: false,
-      cta: "Get Started"
+      cta: "Contact Us"
     }
   ];
 
@@ -119,7 +119,7 @@ const Pricing = () => {
                   className={`w-full ${plan.popular ? 'btn-hero' : 'btn-outline'}`}
                   asChild
                 >
-                  <a href={`/contact?package=${encodeURIComponent(plan.name)}`}>
+                  <a href="/contact">
                     {plan.cta}
                   </a>
                 </Button>

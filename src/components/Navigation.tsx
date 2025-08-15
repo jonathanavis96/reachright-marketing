@@ -48,14 +48,14 @@ const Navigation = () => {
           {/* Desktop Contact Info */}
           <div className="hidden lg:flex items-center space-x-4">
             <a
-              href="tel:+27822227457"
+              href="tel:+27123456789"
               className="flex items-center text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               <Phone className="w-4 h-4 mr-2" />
               Call Us
             </a>
             <a
-              href="mailto:jonathanavis96@gmail.com"
+              href="mailto:info@reachrightmarketing.com"
               className="flex items-center text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               <Mail className="w-4 h-4 mr-2" />
@@ -95,14 +95,14 @@ const Navigation = () => {
               ))}
               <div className="pt-4 border-t border-border mt-4">
                 <a
-                  href="tel:+27822227457"
+                  href="tel:+27123456789"
                   className="flex items-center px-3 py-2 text-sm text-muted-foreground hover:text-primary"
                 >
                   <Phone className="w-4 h-4 mr-2" />
                   Call Us
                 </a>
                 <a
-                  href="mailto:jonathanavis96@gmail.com"
+                  href="mailto:info@reachrightmarketing.com"
                   className="flex items-center px-3 py-2 text-sm text-muted-foreground hover:text-primary"
                 >
                   <Mail className="w-4 h-4 mr-2" />
