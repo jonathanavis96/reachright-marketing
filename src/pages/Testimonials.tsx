@@ -14,6 +14,9 @@ type Testimonial = {
   logoAlt?: string; // accessible alt text for the logo
 };
 
+// Build a correct URL for assets served from /public (works under GH Pages subpath)
+const CES_LOGO = `${import.meta.env.BASE_URL}assets/img/logos/CESlogo.png`;
+
 const Testimonials = () => {
   const testimonials: Testimonial[] = [
     {
@@ -26,9 +29,7 @@ const Testimonials = () => {
       result: "300% increase in online engagement",
       verified: true,
       link: "https://www.cesnet.co.za/",
-      // NOTE: For Vite, put the image in: public/assets/img/logos/CESlogo.png
-      // and reference it at runtime WITHOUT '/public'
-      logo: "/assets/img/logos/CESlogo.png",
+      logo: CES_LOGO,
       logoAlt: "CES (Coastal and Environmental Services) logo"
     },
     {
@@ -163,7 +164,6 @@ const Testimonials = () => {
                         {testimonial.name}
                       </div>
 
-
                       {/* Company */}
                       <div className="text-sm text-muted-foreground">
                         {testimonial.company}
@@ -257,23 +257,3 @@ const Testimonials = () => {
                 3
               </div>
               <h3 className="text-xl font-bold text-foreground mb-2">Execute</h3>
-              <p className="text-muted-foreground">We implement and manage your marketing campaigns</p>
-            </div>
-
-            <div className="text-center animate-scale-in">
-              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 text-primary-foreground font-bold text-xl">
-                4
-              </div>
-              <h3 className="text-xl font-bold text-foreground mb-2">Optimize</h3>
-              <p className="text-muted-foreground">We continuously improve and scale your results</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <Footer />
-    </div>
-  );
-};
-
-export default Testimonials;
