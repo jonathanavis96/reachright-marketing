@@ -4,9 +4,7 @@ import { Facebook, Instagram, Linkedin, Twitter, Phone, Mail, MessageCircle } fr
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  // Determine base path robustly:
-  // 1) Use VITE_BASE_PATH if provided
-  // 2) Otherwise infer from the first segment of the URL (works on GitHub Pages project sites)
+  // Base path only for static asset URLs (icons/images), NOT for <Link to="...">
   const inferredBase = (() => {
     const parts = window.location.pathname.split("/").filter(Boolean);
     return parts.length > 0 ? `/${parts[0]}` : "";
@@ -19,7 +17,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
-            <Link to={`${basePath}`} className="flex items-center space-x-2 mb-4">
+            {/* Use "/" so React Router applies its basename once */}
+            <Link to="/" className="flex items-center space-x-2 mb-4">
               <img
                 src={`${basePath}/assets/img/branding/android-chrome-192x192.png`}
                 alt="ReachRight Marketing"
@@ -81,22 +80,22 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold text-foreground mb-4">Quick Links</h3>
             <div className="space-y-2">
-              <Link to={`${basePath}/`} className="block text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/" className="block text-muted-foreground hover:text-primary transition-colors">
                 Home
               </Link>
-              <Link to={`${basePath}/about`} className="block text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/about" className="block text-muted-foreground hover:text-primary transition-colors">
                 About Us
               </Link>
-              <Link to={`${basePath}/services`} className="block text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/services" className="block text-muted-foreground hover:text-primary transition-colors">
                 Services
               </Link>
-              <Link to={`${basePath}/pricing`} className="block text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/pricing" className="block text-muted-foreground hover:text-primary transition-colors">
                 Pricing
               </Link>
-              <Link to={`${basePath}/testimonials`} className="block text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/testimonials" className="block text-muted-foreground hover:text-primary transition-colors">
                 Testimonials
               </Link>
-              <Link to={`${basePath}/contact`} className="block text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/contact" className="block text-muted-foreground hover:text-primary transition-colors">
                 Contact
               </Link>
             </div>
