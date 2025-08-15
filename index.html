@@ -17,33 +17,33 @@
     <meta name="twitter:site" content="@lovable_dev" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/branding/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/branding/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/branding/favicon-16x16.png">
-    <link rel="manifest" href="/assets/img/branding/site.webmanifest">
-    <link rel="icon" type="image/x-icon" href="/assets/img/branding/favicon.ico">
+    <!-- Favicons (use Vite's BASE_URL so paths work under /reachright-marketing/) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="%BASE_URL%assets/img/branding/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="%BASE_URL%assets/img/branding/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="%BASE_URL%assets/img/branding/favicon-16x16.png">
+    <link rel="manifest" href="%BASE_URL%assets/img/branding/site.webmanifest">
+    <link rel="icon" type="image/x-icon" href="%BASE_URL%assets/img/branding/favicon.ico">
     <meta name="theme-color" content="#0d6efd">
 
-    <!-- GitHub Pages SPA redirect handler -->
+    <!-- GitHub Pages SPA redirect decoder (works with public/404.html redirect) -->
     <script>
-      (function () {
-        var params = new URLSearchParams(window.location.search);
-        var p = params.get("p");
-        var h = params.get("h") || "";
+      (function(l) {
+        // If the redirected URL contains "/?/" (from 404.html), restore the original path
+        if (l.search && l.search[1] === '/') {
+          var decoded = l.search.slice(1) // drop leading '?'
+            .split('&')
+            .map(function (s) { return s.replace(/~and~/g, '&'); })
+            .join('?'); // put the first '&' back to '?'
 
-        if (p) {
-          var base = "/reachright-marketing/"; // Must match your Vite base
-          var cleaned = p.replace(/^\/+/, "");
-          var finalUrl = base + cleaned + h;
-          window.history.replaceState(null, "", finalUrl);
+          var newUrl = l.pathname.replace(/\/$/, '') + decoded + l.hash;
+          window.history.replaceState(null, null, newUrl);
         }
-      })();
+      })(window.location);
     </script>
   </head>
 
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="%BASE_URL%src/main.tsx"></script>
   </body>
 </html>
