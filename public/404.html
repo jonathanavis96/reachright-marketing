@@ -3,25 +3,26 @@
   <head>
     <meta charset="utf-8" />
     <title>Redirecting…</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script>
       (function() {
-        // Your repo base on GH Pages
-        var base = "/reachright-marketing/";
+        // For GitHub Pages *project* sites, set the number of path segments to keep.
+        // Example: https://username.github.io/reachright-marketing/  -> segmentCount = 1 (the repo name)
+        var segmentCount = 1;
 
         var l = window.location;
-        // Strip the base from the front of the path (if present)
-        var path = l.pathname.replace(base, "").replace(/^\//, "");
-        var query = l.search || "";
-        var hash = l.hash || "";
+        var pathSegments = l.pathname.slice(1).split('/');
 
-        // Send users to index with the original path+query+hash encoded as params
-        var redirectUrl =
-          base +
-          "?p=" + encodeURIComponent(path + query) +
-          "&h=" + encodeURIComponent(hash);
+        // Build the new URL: keep the first `segmentCount` segments (the repo),
+        // then append "?/" + the rest of the original path to pass it through to index.html.
+        var newUrl = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+          '/' + pathSegments.slice(0, segmentCount).join('/') +
+          '/?/' + pathSegments.slice(segmentCount).join('/');
 
-        l.replace(redirectUrl);
+        // Preserve query (replace & with ~and~ so we can safely round-trip) and hash
+        if (l.search) newUrl += (l.search.replace('?', '&').replace(/&/g, '~and~'));
+        if (l.hash) newUrl += l.hash;
+
+        l.replace(newUrl);
       })();
     </script>
   </head>
