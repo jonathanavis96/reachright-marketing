@@ -24,10 +24,16 @@ const Navigation = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-xl">R</span>
-            </div>
-            <span className="font-bold text-xl text-foreground">ReachRight Marketing</span>
+            <img
+              src="/assets/img/branding/android-chrome-192x192.png"
+              alt="ReachRight Marketing"
+              width={40}
+              height={40}
+              className="rounded-lg"
+            />
+            <span className="font-bold text-xl text-foreground">
+              ReachRight Marketing
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -65,11 +71,7 @@ const Navigation = () => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsOpen(!isOpen)}
-            >
+            <Button variant="ghost" size="sm" onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
@@ -103,6 +105,8 @@ const Navigation = () => {
                 </a>
                 <a
                   href="mailto:jonathanavis96@gmail.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center px-3 py-2 text-sm text-muted-foreground hover:text-primary"
                 >
                   <Mail className="w-4 h-4 mr-2" />
