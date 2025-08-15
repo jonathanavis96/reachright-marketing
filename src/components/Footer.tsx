@@ -90,21 +90,21 @@ const Footer = () => {
             <h3 className="font-semibold text-foreground mb-4">Contact Us</h3>
             <div className="space-y-3">
               <a
-                href="mailto:info@reachrightmarketing.com"
+                href="mailto:jonathanavis96@gmail.com"
                 className="flex items-center text-muted-foreground hover:text-primary transition-colors"
               >
                 <Mail className="w-4 h-4 mr-2" />
                 Email Us Here
               </a>
               <a
-                href="tel:+27123456789"
+                href="tel:+27822227457"
                 className="flex items-center text-muted-foreground hover:text-primary transition-colors"
               >
                 <Phone className="w-4 h-4 mr-2" />
-                +27 12 345 6789
+                +27 82 222 7457
               </a>
               <a
-                href="https://wa.me/27123456789"
+                href="https://wa.me/27765864469"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center text-muted-foreground hover:text-primary transition-colors"

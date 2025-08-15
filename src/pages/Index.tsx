@@ -140,14 +140,14 @@ const Index = () => {
             {/* Quick Contact Links */}
             <div className="mt-12 flex flex-col sm:flex-row gap-6 justify-center items-center">
               <a
-                href="mailto:info@reachrightmarketing.com"
+                href="mailto:jonathanavis96@gmail.com"
                 className="text-primary hover:text-primary-glow transition-colors flex items-center"
               >
                 Email Us Here
                 <ArrowRight className="ml-2 w-4 h-4" />
               </a>
               <a
-                href="https://wa.me/27123456789"
+                href="https://wa.me/27765864469"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:text-primary-glow transition-colors flex items-center"
@@ -156,7 +156,7 @@ const Index = () => {
                 <ArrowRight className="ml-2 w-4 h-4" />
               </a>
               <a
-                href="tel:+27123456789"
+                href="tel:+27822227457"
                 className="text-primary hover:text-primary-glow transition-colors flex items-center"
               >
                 Call Us Now

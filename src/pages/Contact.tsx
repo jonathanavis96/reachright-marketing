@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { 
   Mail, 
@@ -17,19 +19,48 @@ import {
 
 const Contact = () => {
   const { toast } = useToast();
+  const [searchParams] = useSearchParams();
+  const packageFromUrl = searchParams.get('package');
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
+    package: "",
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const packages = [
+    "Basic Package",
+    "Standard Package", 
+    "Premium Package",
+    "Custom Package",
+    "General Inquiry"
+  ];
+
+  useEffect(() => {
+    if (packageFromUrl) {
+      setFormData(prev => ({
+        ...prev,
+        package: packageFromUrl,
+        message: `Hi, I'm interested in the ${packageFromUrl}. Please provide more information about this package and how we can get started.`
+      }));
+    }
+  }, [packageFromUrl]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
+    }));
+  };
+
+  const handlePackageChange = (value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      package: value
     }));
   };
 
@@ -50,6 +81,7 @@ const Contact = () => {
         name: "",
         email: "",
         phone: "",
+        package: "",
         message: ""
       });
     } catch (error) {
@@ -68,24 +100,24 @@ const Contact = () => {
       icon: <Mail className="w-6 h-6" />,
       title: "Email Us",
       description: "Get in touch via email",
-      value: "info@reachrightmarketing.com",
-      action: "mailto:info@reachrightmarketing.com",
+      value: "jonathanavis96@gmail.com",
+      action: "mailto:jonathanavis96@gmail.com",
       cta: "Email Us Here"
     },
     {
       icon: <Phone className="w-6 h-6" />,
       title: "Call Us",
       description: "Speak directly with our team",
-      value: "+27 12 345 6789",
-      action: "tel:+27123456789",
+      value: "+27 82 222 7457",
+      action: "tel:+27822227457",
       cta: "Call Now"
     },
     {
       icon: <MessageCircle className="w-6 h-6" />,
       title: "WhatsApp",
       description: "Quick chat on WhatsApp",
-      value: "+27 12 345 6789",
-      action: "https://wa.me/27123456789",
+      value: "+27 76 586 4469",
+      action: "https://wa.me/27765864469",
       cta: "WhatsApp Us Here"
     }
   ];
@@ -162,8 +194,24 @@ const Contact = () => {
                       value={formData.phone}
                       onChange={handleInputChange}
                       className="mt-1"
-                      placeholder="+27 12 345 6789"
+                      placeholder="+27 82 222 7457"
                     />
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="package">Package Interest</Label>
+                    <Select value={formData.package} onValueChange={handlePackageChange}>
+                      <SelectTrigger className="mt-1">
+                        <SelectValue placeholder="Select a package you're interested in" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {packages.map((pkg) => (
+                          <SelectItem key={pkg} value={pkg}>
+                            {pkg}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
                   
                   <div>
