@@ -30,10 +30,8 @@ export default defineConfig(({ mode }) => ({
     },
   },
 
-  // Safe defaults; not strictly required but nice to be explicit.
   build: {
     outDir: "dist",
     emptyOutDir: true,
-    // sourcemap: true, // <- enable if you want to debug production builds
   },
 }));
