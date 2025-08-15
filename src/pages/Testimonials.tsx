@@ -26,9 +26,8 @@ const Testimonials = () => {
       result: "300% increase in online engagement",
       verified: true,
       link: "https://www.cesnet.co.za/",
-      // NOTE: For Vite, put the image in: public/assets/img/logos/CESlogo.png
-      // and reference it at runtime WITHOUT '/public'
-      logo: "/assets/img/logos/CESlogo.png",
+      // Corrected path for Vite/GitHub Pages using BASE_URL
+      logo: `${import.meta.env.BASE_URL}assets/img/logos/CESlogo.png`,
       logoAlt: "CES (Coastal and Environmental Services) logo",
     },
     {
@@ -250,7 +249,6 @@ const Testimonials = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* Card 1 */}
             <div className="text-center animate-scale-in">
               <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 text-primary-foreground font-bold text-xl">
                 1
@@ -261,7 +259,6 @@ const Testimonials = () => {
               </p>
             </div>
 
-            {/* Card 2 */}
             <div className="text-center animate-scale-in">
               <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 text-primary-foreground font-bold text-xl">
                 2
@@ -272,7 +269,6 @@ const Testimonials = () => {
               </p>
             </div>
 
-            {/* Card 3 */}
             <div className="text-center animate-scale-in">
               <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 text-primary-foreground font-bold text-xl">
                 3
@@ -283,7 +279,6 @@ const Testimonials = () => {
               </p>
             </div>
 
-            {/* Card 4 */}
             <div className="text-center animate-scale-in">
               <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 text-primary-foreground font-bold text-xl">
                 4
