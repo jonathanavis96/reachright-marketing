@@ -1,30 +1,47 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Redirecting…</title>
+    <title>Loading…</title>
+    <meta name="robots" content="noindex" />
+    <style>
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 2rem; color: #334; }
+    </style>
     <script>
-      (function() {
-        // For GitHub Pages *project* sites, set the number of path segments to keep.
-        // Example: https://username.github.io/reachright-marketing/  -> segmentCount = 1 (the repo name)
-        var segmentCount = 1;
-
+      (function () {
         var l = window.location;
-        var pathSegments = l.pathname.slice(1).split('/');
 
-        // Build the new URL: keep the first `segmentCount` segments (the repo),
-        // then append "?/" + the rest of the original path to pass it through to index.html.
-        var newUrl = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-          '/' + pathSegments.slice(0, segmentCount).join('/') +
-          '/?/' + pathSegments.slice(segmentCount).join('/');
+        // Detect the repo base from the first path segment: /<repo>/...
+        var segments = l.pathname.replace(/^\/+/, '').split('/');
+        var repo = segments[0] || 'reachright-marketing'; // fallback to your repo name
+        var base = '/' + repo + '/';
 
-        // Preserve query (replace & with ~and~ so we can safely round-trip) and hash
-        if (l.search) newUrl += (l.search.replace('?', '&').replace(/&/g, '~and~'));
-        if (l.hash) newUrl += l.hash;
+        // Preserve the original clean URL (path + query + hash)
+        var originalUrl = base + segments.slice(1).join('/') + l.search + l.hash;
 
-        l.replace(newUrl);
+        // 1) Switch the URL bar back to the original clean route (no ?), so the app router sees it.
+        try { history.replaceState(null, '', originalUrl); } catch (_) {}
+
+        // 2) Fetch the real index.html and swap it in (no query hacks).
+        fetch(base + 'index.html', { cache: 'no-store' })
+          .then(function (r) { return r.text(); })
+          .then(function (html) {
+            // Write the actual app HTML so all assets load correctly
+            document.open();
+            document.write(html);
+            document.close();
+
+            // 3) Ensure the final URL stays clean after the app boots.
+            try { history.replaceState(null, '', originalUrl); } catch (_) {}
+          })
+          .catch(function () {
+            // If anything fails, at least land on the site root.
+            l.replace(base);
+          });
       })();
     </script>
   </head>
-  <body>Redirecting…</body>
+  <body>
+    Loading…
+  </body>
 </html>
