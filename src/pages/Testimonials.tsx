@@ -28,7 +28,7 @@ const Testimonials = () => {
       link: "https://www.cesnet.co.za/",
       // NOTE: For Vite, put the image in: public/assets/img/logos/CESlogo.png
       // and reference it at runtime WITHOUT '/public'
-      logo: "/public/assets/img/logos/CESlogo.png",
+      logo: "/assets/img/logos/CESlogo.png",
       logoAlt: "CES (Coastal and Environmental Services) logo"
     },
     {
@@ -159,13 +159,10 @@ const Testimonials = () => {
                 <div className="border-t border-border pt-4">
                   <div className="flex justify-between items-start mb-2">
                     <div>
-                      {/* Name */}
                       <div className="font-semibold text-foreground">
-                        {testimonial.name}{" "}
-                        {testimonial.verified && (
-                          <span className="text-muted-foreground">(Verified Client)</span>
-                        )}
+                        {testimonial.name}
                       </div>
+
 
                       {/* Company */}
                       <div className="text-sm text-muted-foreground">
