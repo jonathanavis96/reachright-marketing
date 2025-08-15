@@ -6,8 +6,11 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  // Explicitly mark this as a single-page app
+  appType: "spa",
+
   server: {
-    host: "::",
+    host: "::", // dev only
     port: 8080,
   },
 
@@ -31,5 +34,6 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: "dist",
     emptyOutDir: true,
+    // sourcemap: true, // <- enable if you want to debug production builds
   },
 }));
