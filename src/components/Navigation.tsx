@@ -25,7 +25,7 @@ const Navigation = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <img
-              src="/assets/img/branding/android-chrome-192x192.png"
+              src="/reachright-marketing/assets/img/branding/android-chrome-192x192.png"
               alt="ReachRight Marketing"
               width={40}
               height={40}
