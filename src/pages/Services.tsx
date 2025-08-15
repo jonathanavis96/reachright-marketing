@@ -188,15 +188,15 @@ const Services = () => {
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Let's discuss how our comprehensive marketing services can help your business reach new heights.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div clssName="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
-                href="/contact" 
+                href="contact" 
                 className="btn-hero inline-flex items-center justify-center text-center"
               >
                 Get Started Today
               </a>
               <a 
-                href="/pricing" 
+                href="pricing" 
                 className="btn-outline inline-flex items-center justify-center text-center"
               >
                 View Our Pricing
