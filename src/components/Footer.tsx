@@ -14,7 +14,7 @@ const Footer = () => {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <img
-                src="/assets/img/branding/favicon-32x32.png"
+                src="/reachright-marketing/assets/img/branding/android-chrome-192x192.png"
                 alt="ReachRight Marketing"
                 width="40"
                 height="40"
