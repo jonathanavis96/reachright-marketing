@@ -24,6 +24,22 @@
     <link rel="manifest" href="/assets/img/branding/site.webmanifest">
     <link rel="icon" type="image/x-icon" href="/assets/img/branding/favicon.ico">
     <meta name="theme-color" content="#0d6efd">
+
+    <!-- GitHub Pages SPA redirect handler -->
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var p = params.get("p");
+        var h = params.get("h") || "";
+
+        if (p) {
+          var base = "/reachright-marketing/"; // Must match your Vite base
+          var cleaned = p.replace(/^\/+/, "");
+          var finalUrl = base + cleaned + h;
+          window.history.replaceState(null, "", finalUrl);
+        }
+      })();
+    </script>
   </head>
 
   <body>
