@@ -18,21 +18,21 @@ const Index = () => {
       title: "Thrive with Innovative Marketing",
       description: "Unlock the potential of your business with our expert marketing solutions and propel your brand to new heights.",
       cta: "Read More Here",
-      link: "/services"
+      link: "services"
     },
     {
       icon: <DollarSign className="w-8 h-8" />,
       title: "Our Pricing",
       description: "Accessible and affordable packages catering to sole proprietorships, SMEs, and enterprises alike.",
       cta: "View Plans",
-      link: "/pricing"
+      link: "pricing"
     },
     {
       icon: <MessageSquare className="w-8 h-8" />,
       title: "Contact Us",
       description: "Ready to get started? Get in touch via email, phone, or WhatsApp for a free consultation.",
       cta: "Get in Touch",
-      link: "/contact"
+      link: "contact"
     }
   ];
 
