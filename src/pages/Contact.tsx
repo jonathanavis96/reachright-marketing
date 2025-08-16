@@ -1,3 +1,4 @@
+// src/pages/Contact.tsx
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import Navigation from "@/components/Navigation";
@@ -8,32 +9,45 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { 
-  Mail, 
-  Phone, 
-  MessageCircle, 
-  MapPin, 
-  Clock, 
-  Send 
+import {
+  Mail,
+  Phone,
+  MessageCircle,
+  MapPin,
+  Clock,
+  Send
 } from "lucide-react";
+
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xblkerqk";
+
+type FormData = {
+  name: string;
+  email: string;
+  phone: string;
+  package: string;
+  message: string;
+  /** Honeypot (bots fill this; humans won't). */
+  company?: string;
+};
 
 const Contact = () => {
   const { toast } = useToast();
   const [searchParams] = useSearchParams();
-  const packageFromUrl = searchParams.get('package');
-  
-  const [formData, setFormData] = useState({
+  const packageFromUrl = searchParams.get("package");
+
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     phone: "",
     package: "",
-    message: ""
+    message: "",
+    company: "" // honeypot
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const packages = [
     "Basic Package",
-    "Standard Package", 
+    "Standard Package",
     "Premium Package",
     "Custom Package",
     "General Inquiry"
@@ -66,28 +80,70 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Simple client-side guard
+    if (!formData.name || !formData.email || !formData.message) {
+      toast({
+        title: "Missing fields",
+        description: "Please fill in your name, email, and message.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Honeypot check (if filled, likely a bot; silently succeed)
+    if (formData.company && formData.company.trim().length > 0) {
+      return;
+    }
+
     setIsSubmitting(true);
 
-    // Simulate form submission
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      toast({
-        title: "Message Sent Successfully!",
-        description: "We'll get back to you within 24 hours.",
+      // Formspree JSON API
+      // Any keys you send will be captured; ensure "email" is present for replies.
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          ...formData,
+          // Optional helpful extras:
+          _subject: `New ReachRight inquiry${formData.package ? ` — ${formData.package}` : ""}`,
+          _source: "reachright-marketing/contact",
+        })
       });
-      
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        package: "",
-        message: ""
-      });
-    } catch (error) {
+
+      if (response.ok) {
+        toast({
+          title: "Message Sent Successfully!",
+          description: "We'll get back to you within 24 hours.",
+        });
+
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          package: "",
+          message: "",
+          company: ""
+        });
+      } else {
+        const data = await response.json().catch(() => null);
+        const errorMsg =
+          data?.errors?.[0]?.message ||
+          "Something went wrong. Please try again.";
+        toast({
+          title: "Error",
+          description: errorMsg,
+          variant: "destructive",
+        });
+      }
+    } catch {
       toast({
         title: "Error",
-        description: "Something went wrong. Please try again.",
+        description: "Network error. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -131,7 +187,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       {/* Hero Section */}
       <section className="py-20 section-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -156,7 +212,18 @@ const Contact = () => {
                 <h2 className="text-3xl font-bold text-foreground mb-6">
                   Send Us a Message
                 </h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+                  {/* Honeypot (hidden) */}
+                  <input
+                    type="text"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleInputChange}
+                    className="hidden"
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+
                   <div>
                     <Label htmlFor="name">Full Name *</Label>
                     <Input
@@ -170,7 +237,7 @@ const Contact = () => {
                       placeholder="Your full name"
                     />
                   </div>
-                  
+
                   <div>
                     <Label htmlFor="email">Email Address *</Label>
                     <Input
@@ -184,7 +251,7 @@ const Contact = () => {
                       placeholder="your.email@example.com"
                     />
                   </div>
-                  
+
                   <div>
                     <Label htmlFor="phone">Phone Number</Label>
                     <Input
@@ -197,11 +264,11 @@ const Contact = () => {
                       placeholder="+27 82 222 7457"
                     />
                   </div>
-                  
+
                   <div>
                     <Label htmlFor="package">Package Interest</Label>
                     <Select value={formData.package} onValueChange={handlePackageChange}>
-                      <SelectTrigger className="mt-1">
+                      <SelectTrigger className="mt-1" id="package" aria-label="Package Interest">
                         <SelectValue placeholder="Select a package you're interested in" />
                       </SelectTrigger>
                       <SelectContent>
@@ -213,7 +280,7 @@ const Contact = () => {
                       </SelectContent>
                     </Select>
                   </div>
-                  
+
                   <div>
                     <Label htmlFor="message">Message *</Label>
                     <Textarea
@@ -227,11 +294,12 @@ const Contact = () => {
                       placeholder="Tell us about your business and how we can help..."
                     />
                   </div>
-                  
-                  <Button 
-                    type="submit" 
+
+                  <Button
+                    type="submit"
                     className="btn-hero w-full"
                     disabled={isSubmitting}
+                    aria-disabled={isSubmitting}
                   >
                     {isSubmitting ? (
                       "Sending..."
@@ -269,8 +337,8 @@ const Contact = () => {
                         <p className="text-muted-foreground mb-3">{info.value}</p>
                         <a
                           href={info.action}
-                          target={info.action.startsWith('http') ? '_blank' : '_self'}
-                          rel={info.action.startsWith('http') ? 'noopener noreferrer' : ''}
+                          target={info.action.startsWith("http") ? "_blank" : "_self"}
+                          rel={info.action.startsWith("http") ? "noopener noreferrer" : ""}
                           className="btn-outline inline-flex items-center justify-center"
                         >
                           {info.cta}
@@ -303,7 +371,7 @@ const Contact = () => {
                     <h3 className="text-xl font-semibold text-foreground">Location</h3>
                   </div>
                   <p className="text-muted-foreground">
-                    Proudly serving businesses across South Africa and beyond. 
+                    Proudly serving businesses across South Africa and beyond.
                     Remote consultations available worldwide.
                   </p>
                 </div>
@@ -324,36 +392,36 @@ const Contact = () => {
               Quick answers to common questions
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="marketing-card animate-scale-in">
               <h3 className="font-semibold text-foreground mb-3">How quickly can we get started?</h3>
               <p className="text-muted-foreground">
-                We can begin working on your project within 24-48 hours of our initial consultation. 
+                We can begin working on your project within 24-48 hours of our initial consultation.
                 Setup typically takes 1-2 weeks depending on the package.
               </p>
             </div>
-            
+
             <div className="marketing-card animate-scale-in">
               <h3 className="font-semibold text-foreground mb-3">Do you work with international clients?</h3>
               <p className="text-muted-foreground">
-                Yes! While we're based in South Africa, we work with clients globally. 
+                Yes! While we're based in South Africa, we work with clients globally.
                 All consultations can be conducted remotely via video call.
               </p>
             </div>
-            
+
             <div className="marketing-card animate-scale-in">
               <h3 className="font-semibold text-foreground mb-3">What if I'm not satisfied with the results?</h3>
               <p className="text-muted-foreground">
-                We're committed to your success. We offer regular reviews and strategy 
+                We're committed to your success. We offer regular reviews and strategy
                 adjustments to ensure you're seeing the results you expect.
               </p>
             </div>
-            
+
             <div className="marketing-card animate-scale-in">
               <h3 className="font-semibold text-foreground mb-3">Can I speak with past clients?</h3>
               <p className="text-muted-foreground">
-                We'd be happy to connect you with past clients who can share their experience. 
+                We'd be happy to connect you with past clients who can share their experience.
                 Just ask during your consultation call.
               </p>
             </div>
