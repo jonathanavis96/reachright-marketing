@@ -119,7 +119,7 @@ const Pricing = () => {
                   className={`w-full ${plan.popular ? 'btn-hero' : 'btn-outline'}`}
                   asChild
                 >
-                  <a href={`/contact?package=${encodeURIComponent(plan.name)}`}>
+                  <a href={`contact?package=${encodeURIComponent(plan.name)}`}>
                     {plan.cta}
                   </a>
                 </Button>
@@ -142,12 +142,12 @@ const Pricing = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="btn-hero" asChild>
-                <a href="/contact">
+                <a href="contact">
                   Discuss Custom Package
                 </a>
               </Button>
               <Button className="btn-outline" asChild>
-                <a href="/services">
+                <a href="services">
                   View All Services
                 </a>
               </Button>
