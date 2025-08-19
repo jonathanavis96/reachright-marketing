@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => ({
   // Important for GitHub Pages project sites:
   // In production, serve under the repo subpath so assets resolve correctly.
   // Example site URL: https://<user>.github.io/reachright-marketing/
-  base: mode === "production" ? "/reachright-marketing/" : "/",
+  base: "/",
 
   plugins: [
     react(),
