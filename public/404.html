@@ -11,31 +11,23 @@
       (function () {
         var l = window.location;
 
-        // Detect the repo base from the first path segment: /<repo>/...
-        var segments = l.pathname.replace(/^\/+/, '').split('/');
-        var repo = segments[0] || 'reachright-marketing'; // fallback to your repo name
-        var base = '/' + repo + '/';
+        // On a custom domain, the SPA lives at the root.
+        var base = '/';
 
-        // Preserve the original clean URL (path + query + hash)
-        var originalUrl = base + segments.slice(1).join('/') + l.search + l.hash;
+        // Preserve the exact path the user requested (e.g. /about/)
+        var originalUrl = l.pathname + l.search + l.hash;
 
-        // 1) Switch the URL bar back to the original clean route (no ?), so the app router sees it.
-        try { history.replaceState(null, '', originalUrl); } catch (_) {}
-
-        // 2) Fetch the real index.html and swap it in (no query hacks).
+        // Fetch the real app shell once and swap it in
         fetch(base + 'index.html', { cache: 'no-store' })
           .then(function (r) { return r.text(); })
           .then(function (html) {
-            // Write the actual app HTML so all assets load correctly
             document.open();
             document.write(html);
             document.close();
-
-            // 3) Ensure the final URL stays clean after the app boots.
             try { history.replaceState(null, '', originalUrl); } catch (_) {}
           })
           .catch(function () {
-            // If anything fails, at least land on the site root.
+            // Fallback to the root if fetching fails
             l.replace(base);
           });
       })();
