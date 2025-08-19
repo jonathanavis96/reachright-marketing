@@ -10,6 +10,9 @@
     <meta name="keywords" content="digital marketing, social media management, SEO, branding, content marketing, South Africa, SME marketing, business growth" />
     <meta name="theme-color" content="#0d6efd" />
 
+    <!-- Make all relative URLs resolve from the domain root -->
+    <base href="/" />
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ReachRight Marketing" />
@@ -31,7 +34,7 @@
     <!-- Canonical -->
     <link rel="canonical" href="https://reachrightmarketing.com/" />
 
-    <!-- Favicons & Manifest (absolute-from-root paths) -->
+    <!-- Favicons & Manifest (root-absolute) -->
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/branding/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/branding/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/branding/favicon-16x16.png" />
@@ -41,7 +44,7 @@
 
   <body>
     <div id="root"></div>
-    <!-- Vite will rewrite this to built assets in production -->
+    <!-- Vite rewrites this to built assets in production -->
     <script type="module" src="./src/main.tsx"></script>
   </body>
-</html>
+</html>=
