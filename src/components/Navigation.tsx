@@ -7,6 +7,13 @@ const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
+  // Base path only for static asset URLs (icons/images), NOT for <Link to="...">
+  const inferredBase = (() => {
+    const parts = window.location.pathname.split("/").filter(Boolean);
+    return parts.length > 0 ? `/${parts[0]}` : "";
+  })();
+  const basePath = (import.meta.env.VITE_BASE_PATH ?? "").trim() || inferredBase;
+
   const navigationItems = [
     { path: "/", label: "Home" },
     { path: "/about", label: "About Us" },
