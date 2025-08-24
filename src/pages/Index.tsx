@@ -217,4 +217,3 @@ const Index = () => {
 };
 
 export default Index;
-```0
