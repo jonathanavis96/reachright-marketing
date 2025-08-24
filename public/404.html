@@ -1,39 +1,18 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
   <head>
-    <meta charset="utf-8" />
-    <title>Loading…</title>
-    <meta name="robots" content="noindex" />
-    <style>
-      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 2rem; color: #334; }
-    </style>
+    <meta charset="utf-8">
+    <title>Redirecting…</title>
+    <meta http-equiv="refresh" content="0; url=/" />
     <script>
-      (function () {
-        var l = window.location;
-
-        // On a custom domain, the SPA lives at the root.
-        var base = '/';
-
-        // Preserve the exact path the user requested (e.g. /about/)
-        var originalUrl = l.pathname + l.search + l.hash;
-
-        // Fetch the real app shell once and swap it in
-        fetch(base + 'index.html', { cache: 'no-store' })
-          .then(function (r) { return r.text(); })
-          .then(function (html) {
-            document.open();
-            document.write(html);
-            document.close();
-            try { history.replaceState(null, '', originalUrl); } catch (_) {}
-          })
-          .catch(function () {
-            // Fallback to the root if fetching fails
-            l.replace(base);
-          });
-      })();
+      // spa-github-pages (https://github.com/rafgraph/spa-github-pages)
+      (function(l) {
+        var segmentCount = 0; // root hosting → 0
+        var path = l.pathname.slice(1).split('/').slice(segmentCount);
+        var search = l.search ? l.search.slice(1).replace(/&/g, '~and~') : '';
+        l.replace('/?' + (path.join('/') || '') + (search ? '&' + search : '') + l.hash);
+      }(window.location));
     </script>
   </head>
-  <body>
-    Loading…
-  </body>
+  <body>Redirecting…</body>
 </html>
