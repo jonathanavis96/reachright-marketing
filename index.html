@@ -2,13 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
 
     <title>ReachRight Marketing - Digital Marketing Solutions for SMEs | Founded 2023</title>
-    <meta name="description" content="Empower your business with ReachRight Marketing's comprehensive digital marketing solutions. Social media management, SEO, branding & more. Affordable packages for SMEs and enterprises." />
+    <meta
+      name="description"
+      content="Empower your business with ReachRight Marketing's comprehensive digital marketing solutions. Social media management, SEO, branding & more. Affordable packages for SMEs and enterprises." />
     <meta name="author" content="ReachRight Marketing" />
-    <meta name="keywords" content="digital marketing, social media management, SEO, branding, content marketing, South Africa, SME marketing, business growth" />
     <meta name="theme-color" content="#0d6efd" />
+    <!-- (FYI: meta keywords is ignored by modern search engines, safe to remove) -->
+    <!-- <meta name="keywords" content="digital marketing, social media management, SEO, branding, content marketing, South Africa, SME marketing, business growth" /> -->
 
     <!-- Make all relative URLs resolve from the domain root -->
     <base href="/" />
@@ -31,7 +36,7 @@
     <meta name="twitter:description" content="Expert digital marketing solutions tailored for SMEs. Social media management, SEO, branding & content marketing." />
     <meta name="twitter:image" content="https://reachrightmarketing.com/og-1200x630.jpg?v=2" />
 
-    <!-- Canonical -->
+    <!-- Canonical (root homepage) -->
     <link rel="canonical" href="https://reachrightmarketing.com/" />
 
     <!-- Favicons & Manifest (root-absolute) -->
@@ -41,6 +46,17 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/branding/favicon-16x16.png" />
     <link rel="icon" type="image/x-icon" href="/assets/img/branding/favicon.ico" />
     <link rel="manifest" href="/assets/img/branding/site.webmanifest?v=2" />
+
+    <!-- Clean-URL helper for the spa-github-pages redirect.
+         When landing on /?/path it restores /path in the address bar. -->
+    <script>
+      (function (l) {
+        if (l.search && l.search[1] === '/') {
+          var decoded = l.search.slice(1).replace(/~and~/g, '&');
+          try { history.replaceState(null, null, decoded + l.hash); } catch (_) {}
+        }
+      }(window.location));
+    </script>
   </head>
 
   <body>
@@ -48,4 +64,4 @@
     <!-- Vite rewrites this to built assets in production -->
     <script type="module" src="./src/main.tsx"></script>
   </body>
-</html>=
+</html>
