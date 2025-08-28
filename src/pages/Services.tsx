@@ -14,7 +14,7 @@ import {
 import socialMediaImg from "@/assets/social-media-marketing.jpg";
 import seoContentImg from "@/assets/seo-content.jpg";
 import brandingImg from "@/assets/branding-design.jpg";
-import alldonesitesImg from "@/assets/alldonesites-homepage.webp"; // ⬅️ NEW: homepage screenshot
+import alldonesitesImg from "@/assets/site-builder-illustration.webp"; // ⬅️ NEW: homepage screenshot
 import Seo from "@/components/Seo";
 
 type Service = {
