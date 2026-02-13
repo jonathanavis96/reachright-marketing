@@ -23,7 +23,8 @@ const Pricing = () => {
         "Monthly performance report",
       ],
       popular: false,
-      cta: "Get Started",
+      cta: "Subscribe Now",
+      paymentUrl: "https://paystack.shop/pay/reachright-basic",
     },
     {
       name: "Standard Package",
@@ -43,7 +44,8 @@ const Pricing = () => {
         "Email marketing setup",
       ],
       popular: true,
-      cta: "Get Started",
+      cta: "Subscribe Now",
+      paymentUrl: "https://paystack.shop/pay/reachright-standard",
     },
     {
       name: "Premium Package",
@@ -64,7 +66,8 @@ const Pricing = () => {
         "Advanced SEO & content marketing",
       ],
       popular: false,
-      cta: "Get Started",
+      cta: "Subscribe Now",
+      paymentUrl: "https://paystack.shop/pay/reachright-premium",
     },
   ];
 
@@ -92,17 +95,12 @@ const Pricing = () => {
               priceCurrency: p.currency,
               availability: "https://schema.org/InStock",
               category: "https://schema.org/BusinessService",
-              url: "https://reachrightmarketing.com/contact?package=" + encodeURIComponent(p.name),
+              url: p.paymentUrl,
               // Optional hint about billing period:
               eligibleQuantity: {
                 "@type": "QuantitativeValue",
                 unitCode: "MON", // per month
                 value: 1,
-              },
-              itemOffered: {
-                "@type": "Service",
-                name: p.name,
-                description: p.description,
               },
             })),
           },
@@ -113,22 +111,22 @@ const Pricing = () => {
         <Navigation />
 
         {/* Hero Section */}
-        <section className="py-20 section-gradient">
+        <section className="pt-32 pb-16 section-gradient">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center animate-fade-in-up">
-              <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
                 Simple, <span className="text-primary">Transparent Pricing</span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Accessible and affordable marketing packages catering to sole proprietorships, SMEs, and enterprises
-                alike
+                Choose the package that fits your business needs. All plans include dedicated support and measurable
+                results.
               </p>
             </div>
           </div>
         </section>
 
         {/* Pricing Cards */}
-        <section className="py-16">
+        <section className="py-16 -mt-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {pricingPlans.map((plan, index) => (
@@ -139,10 +137,10 @@ const Pricing = () => {
                 >
                   {plan.popular && (
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                      <div className="bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-semibold flex items-center">
+                      <span className="bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-semibold flex items-center">
                         <Star className="w-4 h-4 mr-1" />
                         Most Popular
-                      </div>
+                      </span>
                     </div>
                   )}
 
@@ -165,7 +163,7 @@ const Pricing = () => {
                   </div>
 
                   <Button className={`w-full ${plan.popular ? "btn-hero" : "btn-outline"}`} asChild>
-                    <a href={`contact?package=${encodeURIComponent(plan.name)}`}>{plan.cta}</a>
+                    <a href={plan.paymentUrl} target="_blank" rel="noopener noreferrer">{plan.cta}</a>
                   </Button>
                 </div>
               ))}
