@@ -106,7 +106,7 @@ const Footer = () => {
             <h3 className="font-semibold text-foreground mb-4">Contact Us</h3>
             <div className="space-y-3">
               <a
-                href="mailto:jonathanavis96@gmail.com"
+                href="mailto:hello@reachrightmarketing.com"
                 className="flex items-center text-muted-foreground hover:text-primary transition-colors"
               >
                 <Mail className="w-4 h-4 mr-2" />

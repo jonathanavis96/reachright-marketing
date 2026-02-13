@@ -170,13 +170,13 @@ const Index = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button className="btn-hero" asChild>
-                  <a href="contact">
+                  <a href="/contact">
                     Start Your Journey
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </a>
                 </Button>
                 <Button className="btn-outline" asChild>
-                  <a href="pricing">View Our Packages</a>
+                  <a href="/pricing">View Our Packages</a>
                 </Button>
               </div>
 

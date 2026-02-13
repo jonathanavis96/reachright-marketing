@@ -68,7 +68,7 @@ const Navigation = () => {
               Call Us
             </a>
             <a
-              href="mailto:jonathanavis96@gmail.com"
+              href="mailto:hello@reachrightmarketing.com"
               className="flex items-center text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               <Mail className="w-4 h-4 mr-2" />
@@ -111,7 +111,7 @@ const Navigation = () => {
                   Call Us
                 </a>
                 <a
-                  href="mailto:jonathanavis96@gmail.com"
+                  href="mailto:hello@reachrightmarketing.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center px-3 py-2 text-sm text-muted-foreground hover:text-primary"

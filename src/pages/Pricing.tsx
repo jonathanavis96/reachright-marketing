@@ -182,10 +182,10 @@ const Pricing = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button className="btn-hero" asChild>
-                  <a href="contact">Discuss Custom Package</a>
+                  <a href="/contact">Discuss Custom Package</a>
                 </Button>
                 <Button className="btn-outline" asChild>
-                  <a href="services">View All Services</a>
+                  <a href="/services">View All Services</a>
                 </Button>
               </div>
             </div>
