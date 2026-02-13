@@ -8,6 +8,8 @@ interface SeoProps {
   image?: string;
 }
 
+const DEFAULT_OG_IMAGE = "https://reachrightmarketing.com/og-1200x630.jpg?v=2";
+
 /**
  * Normalize rafgraph SPA shim URLs:
  *   https://domain.com/?/about -> https://domain.com/about
@@ -35,6 +37,8 @@ export default function Seo({ title, description, canonical, jsonLd, image }: Se
     computedCanonical = normalizeCanonical(computedCanonical);
   }
 
+  const ogImage = image || DEFAULT_OG_IMAGE;
+
   return (
     <Helmet>
       <title>{title}</title>
@@ -47,10 +51,16 @@ export default function Seo({ title, description, canonical, jsonLd, image }: Se
       {computedCanonical && <meta property="og:url" content={computedCanonical} />}
       <meta property="og:site_name" content="ReachRight Marketing" />
       <meta property="og:locale" content="en_ZA" />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:image:secure_url" content={ogImage} />
+      <meta property="og:image:type" content="image/jpeg" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={ogImage} />
 
       {jsonLd && <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>}
     </Helmet>
